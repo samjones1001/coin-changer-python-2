@@ -8,3 +8,6 @@ def test_passing_1_returns_a_single_penny():
 
 def test_passing_2_returns_2p():
     assert changer.calculate(2) == [2]
+
+def test_passing_5_returns_5p():
+    assert changer.calculate(5) == [5]
