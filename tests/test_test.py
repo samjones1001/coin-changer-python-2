@@ -11,3 +11,6 @@ def test_passing_2_returns_2p():
 
 def test_passing_5_returns_5p():
     assert changer.calculate(5) == [5]
+
+def test_passing_10_returns_10p():
+    assert changer.calculate(10) == [10]
