@@ -47,3 +47,9 @@ def test_returns_correct_combination_of_three_coins_where_needed():
     assert changer.calculate(42) == [20, 20, 2]
     assert changer.calculate(23) == [20, 2, 1]
     assert changer.calculate(112) == [100, 10, 2]
+
+
+def test_returns_correct_combination_of_coins_in_complex_cases():
+    assert changer.calculate(327) == [200, 100, 20, 5, 2]
+    assert changer.calculate(159) == [100, 50, 5, 2, 2]
+    assert changer.calculate(73) == [50, 20, 2, 1]
