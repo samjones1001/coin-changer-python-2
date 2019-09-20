@@ -20,3 +20,6 @@ def test_passing_20_returns_20p():
 
 def test_passing_50_returns_50p():
     assert changer.calculate(50) == [50]
+
+def test_passing_100_returns_1_pound():
+    assert changer.calculate(100) == [100]
