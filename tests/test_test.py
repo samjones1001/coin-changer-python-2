@@ -26,3 +26,8 @@ def test_passing_100_returns_1_pound():
 
 def test_passing_200_returns_2_pounds():
     assert changer.calculate(200) == [200]
+
+def test_correct_combination_of_two_coins_where_needed():
+    assert changer.calculate(3) == [2, 1]
+    assert changer.calculate(6) == [5, 1]
+    assert changer.calculate(25) == [20 ,5]
