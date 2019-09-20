@@ -53,3 +53,16 @@ def test_returns_correct_combination_of_coins_in_complex_cases():
     assert changer.calculate(327) == [200, 100, 20, 5, 2]
     assert changer.calculate(159) == [100, 50, 5, 2, 2]
     assert changer.calculate(73) == [50, 20, 2, 1]
+
+def test_calculate_is_called_by_handler():
+    event = {
+        'queryStringParameters': {
+            'change_amount': 25
+        }
+    }
+
+    expected_output = {
+        'statusCode': 200,
+        'body': '[20, 5]'
+    }
+    assert changer.handler(event, 'context') == expected_output
