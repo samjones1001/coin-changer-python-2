@@ -2,8 +2,12 @@ provider "aws" {
   region = "eu-central-1"
 }
 
+resource "aws_s3_bucket" "bucket" {
+  bucket = "sjones-s3-bucket-coin-changer-2"
+}
+
 resource "aws_lambda_function" "coin-changer-2" {
-  function_name   = "CoinChanger2"
+  function_name = "CoinChanger2"
 
   s3_bucket = "sjones-s3-bucket-coin-changer-2"
   s3_key = "lambda.zip"
@@ -40,5 +44,5 @@ resource "aws_lambda_permission" "apigw" {
   function_name = "${aws_lambda_function.coin-changer-2.function_name}"
   principal = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.coin-changer-2-api.execution_arn}/*/"
+  source_arn = "${aws_api_gateway_rest_api.coin-changer-2-api.execution_arn}/*/*"
 }

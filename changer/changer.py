@@ -1,7 +1,7 @@
 import json
 
 def handler(event, context):
-    change_amount = event['queryStringParameters']['change_amount']
+    change_amount = int(event['queryStringParameters']['change_amount'])
     response = {
         'statusCode': 200,
         'body': json.dumps(calculate(change_amount))
