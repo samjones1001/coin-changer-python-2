@@ -1,6 +1,8 @@
-def calculate(change_amount):
-    denominations = (1, 2, 5, 10, 20, 50, 100, 200)
-    for coin in denominations:
-        if change_amount == coin:
-            return [coin]
-    return []
+def calculate(change_amount, coins=None):
+    if coins is None: coins = []
+    for coin in (200, 100, 50, 20, 10, 5, 2, 1):
+        if change_amount >= coin:
+            for _ in range(int(change_amount / coin)):
+                change_amount -= coin
+                coins.append(coin)
+    return coins
