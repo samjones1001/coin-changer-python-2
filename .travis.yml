@@ -3,5 +3,23 @@ python: 3.7
 install:
   - 'pip install pipenv'
   - 'pipenv sync -d'
-script: 'coverage run -m pytest'
-after_success: 'bash <(curl -s https://codecov.io/bash)'
+script:
+  - coverage run -m pytest
+  - cd changer
+  - zip ../lambda.zip changer.py
+  - cd ..
+  - mkdir build
+  - cp lambda.zip build
+after_success: bash <(curl -s https://codecov.io/bash)
+before_deploy:
+  - cd $TRAVIS_BUILD_DIR
+deploy:
+  provider: s3
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key: $SECRET_ACCESS_KEY
+  bucket: sjones-s3-bucket-coin-changer-2
+  skip_cleanup: true
+  region: eu-central-1
+  local_dir: build
+on:
+  branch: master
