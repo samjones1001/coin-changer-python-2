@@ -2,6 +2,7 @@ language: python
 python: 3.7
 before_install:
   - chmod +x build.sh
+  - chmod +x deploy.sh
 install:
   - pip install pipenv
   - pipenv sync -d
@@ -9,14 +10,19 @@ script:
   - ./build.sh
 after_success: bash <(curl -s https://codecov.io/bash)
 before_deploy:
+  - curl -fSL "https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip" -o terraform.zip
+  - sudo unzip terraform.zip -d /opt/terraform
+  - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
+  - rm -f terraform.zip
   - cd $TRAVIS_BUILD_DIR
 deploy:
-  provider: s3
-  access_key_id: $ACCESS_KEY_ID
-  secret_access_key: $SECRET_ACCESS_KEY
-  bucket: sjones-s3-bucket-coin-changer-2
-  skip_cleanup: true
-  region: eu-central-1
-  local_dir: build
-on:
-  branch: master
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: sjones-s3-bucket-coin-changer-2
+    skip_cleanup: true
+    region: eu-central-1
+    local_dir: build
+    on:
+      branch: master
+after_deploy: ./deploy.sh
