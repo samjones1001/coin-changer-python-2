@@ -1,15 +1,12 @@
 language: python
 python: 3.7
+before_install:
+  - chmod +x build.sh
 install:
-  - 'pip install pipenv'
-  - 'pipenv sync -d'
+  - pip install pipenv
+  - pipenv sync -d
 script:
-  - coverage run -m pytest
-  - cd changer
-  - zip ../lambda.zip changer.py
-  - cd ..
-  - mkdir build
-  - cp lambda.zip build
+  - ./build.sh
 after_success: bash <(curl -s https://codecov.io/bash)
 before_deploy:
   - cd $TRAVIS_BUILD_DIR
