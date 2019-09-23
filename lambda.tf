@@ -2,7 +2,7 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "aws_s3_bucket" "bucket" {
+data "aws_s3_bucket" "bucket" {
   bucket = "sjones-s3-bucket-coin-changer-2"
 }
 
