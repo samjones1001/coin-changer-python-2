@@ -28,14 +28,16 @@ def test_correct_usage(app):
     assert out == "[20, 5, 2]\n"
 
 
-def test_errors_if_no_arguments_passed(capfd):
-    with pytest.raises(Exception):
+def test_errors_if_no_arguments_passed(app):
+    with pytest.raises(Exception) as execinfo:
         app.run()
+    assert "Please provide a numeric argument" in str(execinfo.value)
 
 
-def test_errors_if_non_numeric_argument_passed(capfd):
-    with pytest.raises(Exception):
-        app.run("wrong argument type")
+def test_errors_if_non_numeric_argument_passed(app):
+    with pytest.raises(Exception) as execinfo:
+        app.run()
+    assert "Please provide a numeric argument" in str(execinfo.value)
 
 
 def can_be_run_from_lambda_entry_point():
