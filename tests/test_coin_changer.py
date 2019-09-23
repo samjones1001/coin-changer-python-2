@@ -17,6 +17,7 @@ class Runner():
 
         return out
 
+
 @pytest.fixture
 def app(capfd):
     return Runner(capfd)
