@@ -5,9 +5,7 @@ install:
   - 'pipenv sync -d'
 script:
   - coverage run -m pytest
-  - cd changer
-  - zip ../lambda.zip changer.py
-  - cd ..
+  - zip lambda.zip coin_changer.py changer/*.py
   - mkdir build
   - cp lambda.zip build
 after_success: bash <(curl -s https://codecov.io/bash)
