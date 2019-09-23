@@ -12,7 +12,7 @@ resource "aws_lambda_function" "coin-changer-2" {
   s3_bucket = "sjones-s3-bucket-coin-changer-2"
   s3_key =    "lambda.zip"
 
-  handler =   "changer.handler"
+  handler =   "coin_changer.lambda_main"
   runtime =   "python3.7"
 
   role = aws_iam_role.lambda_exec.arn
