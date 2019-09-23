@@ -8,7 +8,7 @@ def cli_main():
     if __invalid_args():
         raise Exception('Please provide a numeric argument')
     else:
-        print(changer.calculate(int(sys.argv[1])))
+        print(changer.change(int(sys.argv[1])))
 
 
 def __invalid_args():
@@ -19,7 +19,7 @@ def lambda_main(event, context):
     change_amount = int(event['queryStringParameters']['change_amount'])
     response = {
         'statusCode': 200,
-        'body': json.dumps(changer.calculate(change_amount))
+        'body': json.dumps(changer.change(change_amount))
     }
     return response
 

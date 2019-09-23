@@ -1,6 +1,6 @@
 import sys
 import pytest
-from context import main
+from context import cli_main
 
 
 def test_correct_usage(capfd):
@@ -20,6 +20,6 @@ def test_errors_if_non_numeric_argument_passed(capfd):
 
 def launch(params, capfd):
     sys.argv = params
-    main()
+    cli_main()
     out, err = capfd.readouterr()
     return out
